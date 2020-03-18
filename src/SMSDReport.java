@@ -13,7 +13,7 @@ import com.google.gson.Gson;
  * This is the DEMO for SMS Delivery Report API
  */
 public class SMSDReport {
-    private static Log logger=LogFactory.getLog(ReceiveDemo.class);
+    //private static Log logger=LogFactory.getLog(ReceiveDemo.class);
     static class MyMessageListener implements MessageListener{
         private Gson gson=new Gson();
         @Override
@@ -30,7 +30,7 @@ public class SMSDReport {
                 String arg = (String) contentMap.get("arg");
                 //Please start your own code here
             }catch(com.google.gson.JsonSyntaxException e){
-                logger.error("error_json_format:"+message.getMessageBodyAsString(),e);
+                //logger.error("error_json_format:"+message.getMessageBodyAsString(),e);
                 // Message will be deleted for the format error
                 return true;
             } catch (Throwable e) {
@@ -57,11 +57,17 @@ public class SMSDReport {
         //AccessKey, you can get if from Alicloud Console
         String accessKeyId="";
         String accessKeySecret="";
+
+
+
+
         //Message Type: SmsReport
         String messageType="SmsReport";
         //Message Quenue Name, you can get it from SMS console, like:Alicom-Queue-xxxxxx-SmsReport
         String queueName="Alicom-Queue-5185079258585835-SmsReport";
         puller.startReceiveMsgForVPC(accessKeyId, accessKeySecret, messageType, queueName, regionIdForPop,
                 endpointNameForPop, domainForPop, mnsAccountEndpoint,new MyMessageListener());
+
+        System.out.println("Queue Started");
     }
 }
